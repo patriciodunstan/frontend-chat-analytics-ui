@@ -34,7 +34,19 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen w-screen flex items-center justify-center bg-background p-4 overflow-hidden">
+    <div 
+      className="bg-background p-4 overflow-hidden"
+      style={{ 
+        height: '100vh', 
+        width: '100vw', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        position: 'fixed',
+        top: 0,
+        left: 0
+      }}
+    >
       <Card className="w-full max-w-md border-border/50 shadow-lg relative z-10">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
