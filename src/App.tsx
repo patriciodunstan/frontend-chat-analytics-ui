@@ -7,6 +7,8 @@ import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './stores/authStore';
 import LoginPage from './pages/LoginPage';
 import ChatPage from './pages/ChatPage';
+import ReportsPage from './pages/ReportsPage';
+import Layout from './components/Layout';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated, checkAuth } = useAuthStore();
@@ -36,23 +38,29 @@ function App() {
         toastOptions={{
           duration: 4000,
           style: {
-            background: 'var(--background)',
-            color: 'var(--foreground)',
-            border: '1px solid var(--border)',
+            background: 'var(--glass-bg)',
+            color: 'var(--text-main)',
+            border: '1px solid var(--glass-border)',
+            backdropFilter: 'blur(12px)',
           },
         }}
       />
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        
+        {/* Protected Layout Routes */}
         <Route
-          path="/chat"
           element={
             <ProtectedRoute>
-              <ChatPage />
+              <Layout />
             </ProtectedRoute>
           }
-        />
-        <Route path="/" element={<Navigate to="/chat" replace />} />
+        >
+          <Route path="/chat" element={<ChatPage />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/" element={<Navigate to="/chat" replace />} />
+        </Route>
+
         <Route path="*" element={<Navigate to="/chat" replace />} />
       </Routes>
     </BrowserRouter>

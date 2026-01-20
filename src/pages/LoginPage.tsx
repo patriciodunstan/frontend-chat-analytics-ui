@@ -3,7 +3,7 @@
  */
 import React, { useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { LogIn, User, Lock, AlertCircle } from 'lucide-react';
+import { LogIn, User, Lock, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
 
 export default function LoginPage() {
@@ -23,51 +23,54 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <div style={styles.header}>
-          <div style={styles.logo}>
-            <LogIn size={40} color="#3b82f6" />
+    <div className="min-h-screen flex items-center justify-center bg-[var(--bg-app)] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-900 via-[#1a1c2e] to-slate-900 p-4">
+      <div className="glass-panel w-full max-w-md p-8 relative overflow-hidden animate-fade-in">
+        {/* Background glow effect */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] opacity-50" />
+        
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-tr from-[var(--primary)] to-[var(--secondary)] flex items-center justify-center shadow-[0_0_30px_var(--primary-glow)]">
+            <Sparkles size={32} className="text-white" />
           </div>
-          <h1 style={styles.title}>Chat Analytics</h1>
-          <p style={styles.subtitle}>Inicia sesión para continuar</p>
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+            Chat Analytics
+          </h1>
+          <p className="text-[var(--text-muted)] mt-2">Sign in to access your dashboard</p>
         </div>
 
         {error && (
-          <div style={styles.error}>
+          <div className="bg-[rgba(239,68,68,0.1)] border border-[rgba(239,68,68,0.2)] text-[var(--error)] p-3 rounded-lg flex items-center gap-3 mb-6 text-sm animate-fade-in">
             <AlertCircle size={18} />
             <span>{error}</span>
           </div>
         )}
 
-        <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Email</label>
-            <div style={styles.inputWrapper}>
-              <User size={18} style={styles.inputIcon} />
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--text-muted)] ml-1">Email Address</label>
+            <div className="relative group">
+              <User size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within:text-[var(--primary)] transition-colors" />
               <input
                 type="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value); clearError(); }}
-                placeholder="tu@email.com"
-                className="input"
-                style={styles.input}
+                placeholder="name@company.com"
+                className="glass-input pl-10"
                 required
               />
             </div>
           </div>
 
-          <div style={styles.inputGroup}>
-            <label style={styles.label}>Contraseña</label>
-            <div style={styles.inputWrapper}>
-              <Lock size={18} style={styles.inputIcon} />
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-[var(--text-muted)] ml-1">Password</label>
+            <div className="relative group">
+              <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--text-muted)] group-focus-within:text-[var(--primary)] transition-colors" />
               <input
                 type="password"
                 value={password}
                 onChange={(e) => { setPassword(e.target.value); clearError(); }}
                 placeholder="••••••••"
-                className="input"
-                style={styles.input}
+                className="glass-input pl-10"
                 required
               />
             </div>
@@ -75,141 +78,39 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="btn btn-primary"
-            style={styles.submitBtn}
             disabled={isLoading}
+            className="w-full bg-[var(--primary)] hover:bg-[#5558e6] text-white py-3 rounded-xl font-semibold shadow-[0_0_20px_rgba(99,102,241,0.3)] hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] transition-all transform hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
-            {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            {isLoading ? (
+              <>
+                <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Signing in...
+              </>
+            ) : (
+              <>
+                <LogIn size={20} />
+                Sign In
+              </>
+            )}
           </button>
         </form>
 
-        <div style={styles.footer}>
-          <p>¿No tienes cuenta? <Link to="/register" style={styles.link}>Regístrate</Link></p>
+        <div className="mt-8 text-center">
+          <p className="text-[var(--text-muted)] text-sm">
+            Don't have an account?{' '}
+            <Link to="/register" className="text-[var(--primary)] hover:text-[var(--secondary)] font-medium transition-colors">
+              Create account
+            </Link>
+          </p>
         </div>
 
-        <div style={styles.demoCredentials}>
-          <p style={styles.demoTitle}>Credenciales de prueba:</p>
-          <code style={styles.demoCode}>analyst@example.com / analyst123</code>
+        <div className="mt-8 p-4 rounded-xl bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.05)]">
+          <p className="text-xs text-[var(--text-muted)] text-center mb-2">Demo Credentials:</p>
+          <code className="block text-center text-sm font-mono text-[var(--secondary)] bg-[rgba(0,0,0,0.2)] py-2 rounded-lg select-all cursor-pointer hover:bg-[rgba(0,0,0,0.3)] transition-colors">
+            analyst@example.com / analyst123
+          </code>
         </div>
       </div>
     </div>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    minHeight: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    padding: '1rem',
-  },
-  card: {
-    background: 'white',
-    borderRadius: '1rem',
-    padding: '2.5rem',
-    width: '100%',
-    maxWidth: '400px',
-    boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: '2rem',
-  },
-  logo: {
-    width: '80px',
-    height: '80px',
-    background: 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)',
-    borderRadius: '1rem',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0 auto 1rem',
-  },
-  title: {
-    fontSize: '1.75rem',
-    fontWeight: 700,
-    color: '#1e293b',
-    marginBottom: '0.5rem',
-  },
-  subtitle: {
-    color: '#64748b',
-    fontSize: '0.95rem',
-  },
-  error: {
-    background: '#fef2f2',
-    color: '#dc2626',
-    padding: '0.75rem 1rem',
-    borderRadius: '0.5rem',
-    display: 'flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    marginBottom: '1rem',
-    fontSize: '0.875rem',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '1.25rem',
-  },
-  inputGroup: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5rem',
-  },
-  label: {
-    fontSize: '0.875rem',
-    fontWeight: 500,
-    color: '#374151',
-  },
-  inputWrapper: {
-    position: 'relative',
-  },
-  inputIcon: {
-    position: 'absolute',
-    left: '0.875rem',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    color: '#9ca3af',
-  },
-  input: {
-    paddingLeft: '2.75rem',
-  },
-  submitBtn: {
-    width: '100%',
-    padding: '0.875rem',
-    fontSize: '1rem',
-    marginTop: '0.5rem',
-  },
-  footer: {
-    textAlign: 'center',
-    marginTop: '1.5rem',
-    color: '#64748b',
-    fontSize: '0.9rem',
-  },
-  link: {
-    color: '#3b82f6',
-    textDecoration: 'none',
-    fontWeight: 500,
-  },
-  demoCredentials: {
-    marginTop: '1.5rem',
-    padding: '1rem',
-    background: '#f8fafc',
-    borderRadius: '0.5rem',
-    textAlign: 'center',
-  },
-  demoTitle: {
-    fontSize: '0.75rem',
-    color: '#64748b',
-    marginBottom: '0.5rem',
-  },
-  demoCode: {
-    fontSize: '0.8rem',
-    color: '#1e293b',
-    background: '#e2e8f0',
-    padding: '0.25rem 0.5rem',
-    borderRadius: '0.25rem',
-  },
-};
