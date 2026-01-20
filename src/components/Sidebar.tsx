@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { MessageSquare, BarChart2, LogOut, User } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
