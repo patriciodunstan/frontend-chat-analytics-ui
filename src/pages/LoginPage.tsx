@@ -1,7 +1,7 @@
 /**
  * Login page component.
  */
-import React, { useState, type FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { LogIn, User, Lock, AlertCircle, Sparkles } from 'lucide-react';
 import { useAuthStore } from '../stores/authStore';
@@ -17,7 +17,7 @@ export default function LoginPage() {
     try {
       await login(email, password);
       navigate('/chat');
-    } catch (err) {
+    } catch {
       // Error is handled in the store
     }
   };

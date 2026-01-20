@@ -1,0 +1,46 @@
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\App.tsx
+  18:6  warning  React Hook useEffect has a missing dependency: 'checkAuth'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  32:6  warning  React Hook useEffect has a missing dependency: 'checkAuth'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\pages\ChatPage.tsx
+  20:5  error    'createNewConversation' is assigned a value but never used                                                            @typescript-eslint/no-unused-vars
+  30:6  warning  React Hook useEffect has a missing dependency: 'loadConversations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\pages\LoginPage.tsx
+  20:14  error  'err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\pages\ReportsPage.tsx
+   25:14  error  'error' is defined but never used              @typescript-eslint/no-unused-vars
+   44:14  error  'error' is defined but never used              @typescript-eslint/no-unused-vars
+   53:13  error  'url' is assigned a value but never used       @typescript-eslint/no-unused-vars
+   56:13  error  'response' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   71:14  error  'error' is defined but never used              @typescript-eslint/no-unused-vars
+  175:72  error  Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\stores\authStore.ts
+   47:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   70:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  102:26  error  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\stores\chatStore.ts
+  38:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  54:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  97:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\tests\ChatPage.test.tsx
+  2:26  error  'fireEvent' is defined but never used  @typescript-eslint/no-unused-vars
+  3:8   error  'userEvent' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\tests\LoginPage.test.tsx
+  2:26  error  'fireEvent' is defined but never used  @typescript-eslint/no-unused-vars
+  2:37  error  'waitFor' is defined but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\patriciods\frontend-chat-analytics-ui\src\tests\authStore.test.ts
+  32:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  47:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  56:22  error  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  69:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+Ô£û 25 problems (22 errors, 3 warnings)
+

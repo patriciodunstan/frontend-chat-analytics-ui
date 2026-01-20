@@ -22,7 +22,7 @@ export default function ReportsPage() {
     try {
       const response = await reportsApi.list();
       setReports(response.data.reports);
-    } catch (error) {
+    } catch {
       toast.error('Failed to load reports');
     } finally {
       setIsLoading(false);
@@ -41,7 +41,7 @@ export default function ReportsPage() {
       setShowModal(false);
       setNewReportTitle('');
       loadReports();
-    } catch (error) {
+    } catch {
       toast.error('Failed to generate report');
     } finally {
       setIsGenerating(false);
@@ -50,17 +50,13 @@ export default function ReportsPage() {
 
   const downloadReport = async (id: number, title: string) => {
     try {
-      const url = reportsApi.getDownloadUrl(id);
-      
       // Fetch blob with auth headers
-      const response = await reportsApi.get(id); // Just to check existence/status first if needed, 
-      // typically we might need a direct download which might need auth token in URL or blob fetch.
       // For simplicity assuming the API client handles blob downloads or we use a direct link if public.
       // But wait, our API client is Axios. 
       // Let's use a simple window.open if cookies are used, or Axios blob fetch if Bearer token needed.
       // Since we use Bearer token, we need to fetch via Axios.
       
-      const res = await reportsApi.api.get(`/reports/${id}/download`, { responseType: 'blob' });
+      const res = await reportsApi.download(id);
       const blobUrl = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = blobUrl;
@@ -68,7 +64,7 @@ export default function ReportsPage() {
       document.body.appendChild(link);
       link.click();
       link.remove();
-    } catch (error) {
+    } catch {
       toast.error('Download failed');
     }
   };
@@ -172,7 +168,7 @@ export default function ReportsPage() {
                  <label className="block text-sm font-medium text-[var(--text-muted)] mb-1">Type</label>
                  <select
                    value={newReportType}
-                   onChange={(e) => setNewReportType(e.target.value as any)}
+                   onChange={(e) => setNewReportType(e.target.value as ReportRequest['report_type'])}
                    className="glass-input"
                  >
                    <option value="data_summary" className="bg-[var(--bg-app)]">Data Summary</option>

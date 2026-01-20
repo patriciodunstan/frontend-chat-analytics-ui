@@ -1,7 +1,7 @@
 /**
  * Chat component.
  */
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Send,
   Bot,
@@ -13,12 +13,11 @@ import { useChatStore } from '../stores/chatStore';
 
 export default function ChatPage() {
   const {
+    currentConversationId,
     messages,
     isSending,
     loadConversations,
     sendMessage,
-    createNewConversation,
-    currentConversationId
   } = useChatStore();
   
   const [input, setInput] = useState('');
@@ -27,7 +26,7 @@ export default function ChatPage() {
   // Initial load
   useEffect(() => {
     loadConversations();
-  }, []);
+  }, [loadConversations]);
 
   // Auto-scroll
   useEffect(() => {

@@ -74,6 +74,9 @@ export const reportsApi = {
   get: (id: number) => api.get(`/reports/${id}`),
 
   getDownloadUrl: (id: number) => `${API_URL}/reports/${id}/download`,
+
+  download: (id: number) =>
+    api.get(`/reports/${id}/download`, { responseType: "blob" }),
 };
 
 export default api;
